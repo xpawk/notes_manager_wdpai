@@ -1,16 +1,12 @@
 # Project
 
-## 📌 Introduction
-A project based on PHP 8.3, running in Docker containers using Docker Compose. It utilizes the Nginx server to handle HTTP traffic.
+## Introduction
+Notes Manager is a simple web application built with PHP 8.3. It runs in a Docker environment using Docker Compose and serves HTTP traffic through an Nginx server. The project uses PostgreSQL as its database.
 
-## 📦 Requirements
-- Docker
-- Docker Compose
-
-## 🚀 Installation and Running
+## Installation 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/pkkamil/laughing-guacamole.git
+   git clone https://github.com/xpawk/notes_manager_wdpai.git
    cd project
    ```
 2. Start the containers:
@@ -22,7 +18,7 @@ A project based on PHP 8.3, running in Docker containers using Docker Compose. I
    http://localhost
    ```
 
-## 🛠 Project Structure
+## Structure
 ```
 /project
 │── docker/
@@ -39,6 +35,4 @@ A project based on PHP 8.3, running in Docker containers using Docker Compose. I
 │── README.md            # Project documentation
 ```
 
-## 📜 License
-Project available under the MIT license.
 
