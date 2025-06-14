@@ -1,0 +1,47 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*https://coolors.co/104547-4b5358-727072-af929d-d2d6ef*/
+
+:root {
+  --primary-100: #104547;
+  --neutral-white: #ffffff;
+  --neutral-black: #050505;
+  --secondary-100: #4b5358;
+  --teriary-100: #d2d6ef;
+  --neutral-shadow: rgba(5, 5, 5, 0.4);
+}
+
+.flex-column-center-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide-desktop {
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}
+
+.hide-mobile {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}

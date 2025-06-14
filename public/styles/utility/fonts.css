@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("/public/assets/Roboto-Regular.ttf");
+}
+
+html,
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--neutral-black);
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.h1,
+h1 {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
+    margin: 0;
+
+    @media (min-width: 768px) {
+        font-size: 40px;
+        line-height: 48px;
+    }
+}
+
+.h2,
+h2 {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.h3,
+h3 {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+    margin: 0;
+}

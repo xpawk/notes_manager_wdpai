@@ -1,11 +1,12 @@
-FROM php:8.3.18RC1-fpm-alpine3.21
+FROM php:8.2.11-fpm-alpine3.18
 
 ENV RUN_DEPS \
     zlib \
     libzip \
     libpng \
     libjpeg-turbo \
-    postgresql-libs
+    postgresql-libs \
+    postgresql-client
 
 ENV BUILD_DEPS \
     zlib-dev \
@@ -32,6 +33,7 @@ RUN apk add --no-cache --virtual .run-deps $RUN_DEPS
 RUN echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
 
 # Copy the application code
+WORKDIR /app    
 COPY . /app
 
 VOLUME ["/app"]
