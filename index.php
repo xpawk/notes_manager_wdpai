@@ -12,11 +12,17 @@ if ($path === '') {
 }
 
 /* Pages */
-Routing::get ('notes',   'NoteController');
+Routing::get('notes',      'NoteController');   
+Routing::get('noteNew',   'NoteController');   
+Routing::get('notes',   'NoteController');
 Routing::get('index',      'DefaultController');
 Routing::get('register',   'DefaultController');
+Routing::get ('noteEdit',   'NoteController');
 
 /* API */
+Routing::post('noteUpdate', 'NoteController');
+Routing::get('noteDelete', 'NoteController');
+Routing::post('noteCreate','NoteController');
 Routing::post('login',     'AuthController');
 Routing::post('register',  'AuthController');
 Routing::get('logout',    'AuthController');

@@ -5,9 +5,8 @@
 
     <?php if (isset($_SESSION['user'])): ?>
         <div class="nav-right">
-            <a href="/notes/new" class="btn-primary">+ New Note</a>
-
-            <!-- proste „avatar pill” z inicjałów e-maila -->
+            <a href="/noteNew" class="btn-primary">+ New Note</a>
+            
             <span class="avatar-pill">
                 <?php
                     $initials = strtoupper(substr($_SESSION['user']['email'], 0, 2));
