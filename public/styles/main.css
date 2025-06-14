@@ -1,24 +1,30 @@
-body,
-html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
+@import url("./utility/variables.css");
+@import url("./utility/fonts.css");
+@import url("./utility/typography.css") layer(base);
+@import url("./utility/UI.css") layer(utilities);
 
+/*--------------------  Global element reset  --------------------*/
 * {
   box-sizing: border-box;
 }
 
-/*https://coolors.co/104547-4b5358-727072-af929d-d2d6ef*/
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--neutral-900);
+  background: var(--neutral-50);
+  scroll-behavior: smooth;
+}
 
-:root {
-  --primary-100: #104547;
-  --neutral-white: #ffffff;
-  --neutral-black: #050505;
-  --secondary-100: #4b5358;
-  --teriary-100: #d2d6ef;
-  --neutral-shadow: rgba(5, 5, 5, 0.4);
+/*-----------------------  Utilities  ---------------------------*/
+.flex-row-center-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .flex-column-center-center {
@@ -28,20 +34,16 @@ html {
   align-items: center;
 }
 
-.flex-row-center-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* hide helpers */
+.hide-desktop {
+  display: none;
 }
 
-.hide-desktop {
-  @media (min-width: 768px) {
+@media (max-width: 768px) {
+  .hide-mobile {
     display: none !important;
   }
-}
-
-.hide-mobile {
-  @media (max-width: 768px) {
-    display: none !important;
+  .hide-desktop {
+    display: block !important;
   }
 }

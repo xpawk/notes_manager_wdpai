@@ -6,16 +6,16 @@ class User
     private $email;
     private $passwordHash;
 
-    public function __construct($id, $email, $password)
+    public function __construct(?int $id, string $email, string $password)
     {
-        $this->id = $id;
+        $this->id   = $id;
         $this->email = $email;
         $this->setPassword($password);
     }
 
-    public static function fromDatabase($id, $email, $passwordHash)
+    public static function fromDatabase($id, $email, $passwordHash, $fullName = null)
     {
-        $instance = new self($id, $email, '');
+        $instance = new self($id, $email, '', $fullName);
         $instance->passwordHash = $passwordHash;
         return $instance;
     }

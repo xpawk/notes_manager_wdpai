@@ -8,7 +8,7 @@ class DefaultController extends AppController
     public function index()
     {
         if ($this->isLoggedIn()) {
-            header("Location: /index");
+            header("Location: /notes");
             exit;
         }
         $this->render("Auth/login");
@@ -16,7 +16,7 @@ class DefaultController extends AppController
     public function register()
     {
         if ($this->isLoggedIn()) {
-            header("Location: /index");
+            header("Location: /notes");
             exit;
         }
 

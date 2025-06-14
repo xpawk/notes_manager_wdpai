@@ -1,36 +1,58 @@
-input {
-    width: 100%;
-    height: 48px;
-    background-color: var(--secondary-200);
-    outline: none;
-    border: 0;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px var(--neutral-shadow);
-    padding: 24px 0 4px 16px;
-    font-size: 16px;
-    line-height: 24px;
-    color: var(--neutral-black);
+/*-----------------------  Form inputs  -------------------------*/
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--neutral-100);
+  box-shadow: var(--shadow-md);
+  font-size: 16px;
+  color: var(--neutral-900);
 }
 
-button {
-    width: 210px;
-    height: 44px;
-    background-color: var(--secondary-200);
-    border: 0;
-    border-radius: 16px;
-    outline: none;
-    box-shadow: 0 3px 10px var(--neutral-shadow);
-    gap: 12px;
-    color: var(--neutral-black);
-    font-size: 16px;
-    line-height: 20px;
-    font-weight: 600;
-    letter-spacing: 0.1px;
-    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+textarea {
+  min-height: 120px;
+  padding-top: 12px;
+  resize: vertical;
+}
 
-    &:hover {
-        transform: scale(1.05);
-        background-color: var(--secondary-300);
-        cursor: pointer;
-    }
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--primary-100);
+}
+
+/*-----------------------  Buttons  -----------------------------*/
+button,
+.btn,
+.btn-primary {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary,
+button.btn-primary {
+  background: var(--accent-100);
+  color: var(--neutral-0);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover,
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }

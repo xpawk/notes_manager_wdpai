@@ -36,47 +36,53 @@ class AuthController extends AppController
             'email' => $user->getEmail(),
             'id' => $user->getId(),
         ];
-        header("Location: $url/");
+        header("Location: $url/notes");
         exit;
     }
 
-    public function register()
-    {
-        $userRepository = new UserRepository();
+   public function register()
+{
+    $userRepository = new UserRepository();
 
-        if ($this->getRequestMethod() !== 'POST') {
-            $this->render("Auth/register");
-            return;
-        }
-
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
-
-        if (empty($email) || empty($password)) {
-            $this->render("Auth/register", ["error" => "All fields are required"]);
-            return;
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $this->render("Auth/register", ["error" => "Invalid email format"]);
-            return;
-        }
-
-        if (strlen($password) < 6) {
-            $this->render("Auth/register", ["error" => "Password must be at least 6 characters long"]);
-            return;
-        }
-
-        if ($userRepository->getUserByEmail($email)) {
-            $this->render("Auth/register", ["error" => "Email already registered"]);
-            return;
-        }
-
-        $user = new User(null, $email, $password);
-        $userRepository->saveUser($user);
-
-        $this->render("Auth/login", ["success" => "Registration successful! You can now log in."]);
+    if ($this->getRequestMethod() !== 'POST') {
+        $this->render("Auth/register");
+        return;
     }
+
+    $fullName        = trim($_POST['full_name']        ?? '');
+    $email           = trim($_POST['email']            ?? '');
+    $password        = $_POST['password']              ?? '';
+    $passwordConfirm = $_POST['password_confirm']      ?? '';
+
+    if ($fullName === '' || $email === '' || $password === '') {
+        $this->render("Auth/register", ["error" => "All fields are required"]);
+        return;
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $this->render("Auth/register", ["error" => "Invalid email format"]);
+        return;
+    }
+    if ($password !== $passwordConfirm) {
+        $this->render("Auth/register", ["error" => "Passwords do not match"]);
+        return;
+    }
+    if (strlen($password) < 6) {
+        $this->render("Auth/register", ["error" => "Password must be at least 6 characters long"]);
+        return;
+    }
+    if ($userRepository->getUserByEmail($email)) {
+        $this->render("Auth/register", ["error" => "Email already registered"]);
+        return;
+    }
+
+  
+    $user = new User(null, $email, $password);      
+    $userId = $userRepository->saveUser($user);    
+
+    $userRepository->saveUserProfile($userId, $fullName);
+
+    $this->render("Auth/login", ["success" => "Registration successful! You can now log in."]);
+}
 
     public function logout()
     {

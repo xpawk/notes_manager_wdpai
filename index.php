@@ -12,6 +12,7 @@ if ($path === '') {
 }
 
 /* Pages */
+Routing::get ('notes',   'NoteController');
 Routing::get('index',      'DefaultController');
 Routing::get('register',   'DefaultController');
 
