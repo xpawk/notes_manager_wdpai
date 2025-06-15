@@ -12,10 +12,14 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0 64px;
-  background: var(--neutral-0);
+  background: var(--neutral-white);
   border-bottom: 1px solid var(--neutral-200);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   z-index: 1000;
+
+  @media (max-width: 768px) {
+    padding: 0 32px;
+  }
 }
 
 .top-nav .logo {
@@ -34,7 +38,7 @@ body {
 .btn-primary {
   padding: 8px 18px;
   background: var(--accent-100);
-  color: var(--neutral-0);
+  color: var(--neutral-white);
   border-radius: 8px;
   font-weight: 600;
   text-decoration: none;

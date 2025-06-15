@@ -24,6 +24,7 @@ Routing::get ('profileSettings', 'ProfileController');
 Routing::post('profileUpdate',  'ProfileController'); 
 Routing::post('profilePasswordUpdate',  'ProfileController');  
 Routing::post('profilePhotoUpload',  'ProfileController');  
+Routing::get('noteToggleFavorite', 'NoteController');
 Routing::post('noteUpdate', 'NoteController');
 Routing::get('noteDelete', 'NoteController');
 Routing::post('noteCreate','NoteController');

@@ -1,0 +1,175 @@
+/* ───── layout ───── */
+.notes-wrapper {
+  display: flex;
+  gap: 32px;
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ───── sidebar (tag filter) ───── */
+.tag-filter {
+  flex: 0 0 250px;
+  background: var(--neutral-white);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 3px 10px var(--neutral-300);
+}
+
+.tag-filter h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.tag-filter ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-filter .tag {
+  border: none;
+  background: var(--neutral-300);
+  color: var(--neutral-500);
+  padding: 6px 12px;
+  font-weight: 400;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tag-filter .tag:hover {
+  background: var(--secondary-300);
+}
+
+.tag-filter .tag.active {
+  background: var(--accent-100);
+  color: var(--neutral-white);
+}
+
+/* ───── main list ───── */
+#note-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ───── each card ───── */
+.note-card {
+  min-width: 0;
+  background: var(--neutral-white);
+  border-radius: 12px;
+  box-shadow: 0 3px 10px var(--neutral-300);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.note-card header {
+  display: flex;
+  align-items: center;
+}
+
+.note-card header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.note-card h2,
+.note-card p {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.note-modify-buttons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.note-card header a {
+  text-decoration: none;
+  font-size: 18px;
+  color: var(--neutral-500);
+  transition: color 0.2s;
+  &.fav,
+  &.unfav {
+    font-size: 26px;
+    margin-bottom: 3px;
+  }
+  &.fav {
+    color: var(--accent-100);
+  }
+}
+
+.note-card header a:hover {
+  color: var(--accent-100);
+}
+
+/* favorite star */
+.fav-link {
+  font-size: 18px;
+  color: var(--neutral-500);
+}
+.fav-link:hover {
+  color: var(--primary-100);
+}
+
+/* ───── content & footer ───── */
+.note-card p {
+  color: var(--neutral-500);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.note-card footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--neutral-400);
+}
+
+.note-card footer time {
+  font-style: normal;
+}
+
+/* tag list inside card */
+.note-card .tag-list {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.note-card .tag-list li {
+  background: var(--neutral-200);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 15px;
+  color: var(--neutral-500);
+}
+
+@media (max-width: 768px) {
+  .notes-wrapper {
+    flex-direction: column;
+    padding: 16px;
+  }
+  .tag-filter {
+    flex: 0 0 auto;
+    margin-bottom: 16px;
+  }
+}

@@ -6,14 +6,17 @@
   --accent-200: #5535c0;
 
   /* neutrals */
-  --neutral-0: #ffffff;
+  --neutral-white: #ffffff;
   --neutral-50: #f5f5f5;
-  --neutral-100: #e5e7eb;
+  --neutral-100: #f3f4f7;
+  --neutral-200: #e0e5ec;
   --neutral-300: #d1d5db;
+  --neutral-400: #999da3;
+  --neutral-500: #4c5869;
   --neutral-700: #374151;
   --neutral-800: #1f2937;
   --neutral-900: #050505;
-
+  --neutral-black: #000000;
   /* misc */
   --shadow-sm: rgba(0, 0, 0, 0.06) 0 1px 2px;
   --shadow-md: rgba(0, 0, 0, 0.08) 0 3px 10px;

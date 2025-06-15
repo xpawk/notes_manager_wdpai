@@ -47,7 +47,7 @@ button,
 .btn-primary,
 button.btn-primary {
   background: var(--accent-100);
-  color: var(--neutral-0);
+  color: var(--neutral-white);
   box-shadow: var(--shadow-md);
 }
 

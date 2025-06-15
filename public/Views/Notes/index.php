@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/public/favicon.ico" type="image/x-icon">
     <title>My Notes</title>
     <link rel="stylesheet" href="/public/styles/main.css">
-
+    <link rel="stylesheet" href="/public/styles/notes/notes.css">
+    
     <?php include 'public/Views/partials/header.php'; ?>
 </head>
 <body>
@@ -41,29 +44,28 @@
                 <header>
                     <h2><?= htmlspecialchars($note->getTitle()); ?></h2>
 
-                    <!-- favorite toggle -->
-                    <a href="/noteToggleFavorite?id=<?= $note->getId(); ?>"
-                       class="fav-link"
-                       title="<?= $note->isFavorite() ? 'Unfavorite' : 'Favorite'; ?>">
-                        <?= $note->isFavorite() ? '★' : '☆'; ?>
-                    </a>
-
-                    <a href="/noteEdit?id=<?= $note->getId(); ?>"   class="edit-link">Edit</a>
-                    <a href="/noteDelete?id=<?= $note->getId(); ?>" class="delete-link">Delete</a>
+                   <div class="note-modify-buttons">
+                        <a href="/noteToggleFavorite?id=<?= $note->getId(); ?>"
+                        class="fav-link <?= $note->isFavorite() ? 'fav' : 'unfav'; ?>"
+                        title="<?= $note->isFavorite() ? 'Unfavorite' : 'Favorite'; ?>">
+                            <?= $note->isFavorite() ? '★' : '☆'; ?>
+                        </a>
+                        <a href="/noteEdit?id=<?= $note->getId(); ?>"   class="edit-link">Edit</a>
+                        <a href="/noteDelete?id=<?= $note->getId(); ?>" class="delete-link">Delete</a>
+                    </div>
                 </header>
 
                 <p><?= nl2br(htmlspecialchars($note->getContent())); ?></p>
 
                 <footer>
-                    <time datetime="<?= $note->getCreatedAt(); ?>">
-                        <?= date('Y-m-d', strtotime($note->getCreatedAt())); ?>
-                    </time>
-
                     <ul class="tag-list">
                         <?php foreach ($note->getTags() as $t): ?>
                             <li><?= htmlspecialchars($t); ?></li>
                         <?php endforeach; ?>
                     </ul>
+                    <time datetime="<?= $note->getCreatedAt(); ?>">
+                        <?= date('Y-m-d', strtotime($note->getCreatedAt())); ?>
+                    </time>
                 </footer>
             </article>
         <?php endforeach; ?>

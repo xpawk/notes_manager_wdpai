@@ -1,0 +1,73 @@
+/* ───── wrapper & page header ───── */
+.note-form-wrapper {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* If you want a page header like the mockup: */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.page-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+}
+.page-header .save-btn {
+  /* reuse your btn-primary styles, plus a disabled look: */
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ───── the form “card” ───── */
+.note-form {
+  background: var(--neutral-white);
+  border-radius: 12px;
+  box-shadow: 0 3px 10px var(--neutral-shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* each label + input/textarea block */
+.note-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.note-form .hint {
+  font-size: 12px;
+  color: var(--secondary-100);
+  margin-left: 8px;
+  font-weight: 400;
+}
+
+/* override your utility input styles if you need less padding */
+.note-form input[type="text"],
+.note-form textarea {
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+/* button at bottom of form */
+.note-form .btn-primary {
+  align-self: flex-start;
+}
+
+/* ───── responsive tweaks ───── */
+@media (max-width: 768px) {
+  .note-form-wrapper {
+    padding: 0 8px;
+    margin: 16px auto;
+  }
+}
