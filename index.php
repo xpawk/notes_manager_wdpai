@@ -18,8 +18,12 @@ Routing::get('notes',   'NoteController');
 Routing::get('index',      'DefaultController');
 Routing::get('register',   'DefaultController');
 Routing::get ('noteEdit',   'NoteController');
+Routing::get ('profileSettings', 'ProfileController');
 
 /* API */
+Routing::post('profileUpdate',  'ProfileController'); 
+Routing::post('profilePasswordUpdate',  'ProfileController');  
+Routing::post('profilePhotoUpload',  'ProfileController');  
 Routing::post('noteUpdate', 'NoteController');
 Routing::get('noteDelete', 'NoteController');
 Routing::post('noteCreate','NoteController');

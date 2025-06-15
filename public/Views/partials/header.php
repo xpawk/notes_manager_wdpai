@@ -1,4 +1,4 @@
-<link href="/public/styles/partials/header.css" rel="stylesheet">
+<link rel="stylesheet" href="/public/styles/partials/header.css">
 
 <nav class="top-nav">
     <a href="/notes" class="logo">My Notes</a>
@@ -7,12 +7,17 @@
         <div class="nav-right">
             <a href="/noteNew" class="btn-primary">+ New Note</a>
             
-            <span class="avatar-pill">
-                <?php
-                    $initials = strtoupper(substr($_SESSION['user']['email'], 0, 2));
-                    echo htmlspecialchars($initials);
-                ?>
-            </span>
+            <a href="/profileSettings" class="profile-link">
+                <?php if (!empty($_SESSION['user']['avatar_path'])): ?>
+                    <img src="<?= htmlspecialchars($_SESSION['user']['avatar_path']) ?>"
+                         alt="avatar"
+                         class="avatar-pill avatar-img">
+                <?php else: ?>
+                    <span class="avatar-pill">
+                        <?= htmlspecialchars(strtoupper(substr($_SESSION['user']['email'], 0, 2))) ?>
+                    </span>
+                <?php endif; ?>
+            </a>
 
             <a href="/logout" class="logout-btn" title="Log out">Log&nbsp;out</a>
         </div>

@@ -5,21 +5,18 @@ require_once __DIR__ . '/../Models/User.php';
 
 class UserRepository extends Repository
 {
-    public function getUserByEmail(string $email): ?User
+   public function getUserByEmail(string $email): ?array
     {
-        $conn = $this->db->connect();
-        $stmt = $conn->prepare('SELECT * FROM public.users WHERE email = :email');
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->execute();
+        $sql = 'SELECT u.id, u.email, u.password_hash, p.avatar_path, p.full_name
+                FROM users u
+                LEFT JOIN user_profiles p ON p.user_id = u.id
+                WHERE u.email = :email';
+        $stmt = $this->db->connect()->prepare($sql);
+        $stmt->execute([':email' => $email]);
 
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user) {
-            return User::fromDatabase($user['id'], $user['email'], $user['password_hash']);
-        }
-
-        return null;
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
-    
+
     public function saveUser(User $user): int
     {
         $conn = $this->db->connect();
@@ -48,4 +45,54 @@ class UserRepository extends Repository
         ]);
     }
 
+    public function getProfile(int $userId): array
+    {
+        $sql = 'SELECT u.email, p.full_name, p.avatar_path
+                FROM users u
+                LEFT JOIN user_profiles p ON p.user_id = u.id
+                WHERE u.id = :id';
+        $stmt = $this->db->connect()->prepare($sql);
+        $stmt->execute([':id' => $userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateProfile(int $id, string $name, string $email): void
+    {
+        $c = $this->db->connect();
+        $c->beginTransaction();
+        $c->prepare('UPDATE users SET email = :e WHERE id = :id')
+        ->execute([':e' => $email, ':id' => $id]);
+
+        $c->prepare(
+        'INSERT INTO user_profiles (user_id, full_name)
+        VALUES (:id, :n)
+        ON CONFLICT (user_id) DO UPDATE SET full_name = EXCLUDED.full_name')
+        ->execute([':id' => $id, ':n' => $name]);
+        $c->commit();
+    }
+
+    public function updatePassword(int $id, string $plain): void
+    {
+        $hash = password_hash($plain, PASSWORD_DEFAULT);
+        $this->db->connect()
+            ->prepare('UPDATE users SET password_hash = :h WHERE id = :id')
+            ->execute([':h' => $hash, ':id' => $id]);
+    }
+
+    public function updateAvatar(int $id, string $path): void
+    {
+        $this->db->connect()
+            ->prepare(
+            'INSERT INTO user_profiles (user_id, avatar_path)
+                VALUES (:id,:p)
+                ON CONFLICT (user_id) DO UPDATE SET avatar_path = EXCLUDED.avatar_path')
+            ->execute([':id'=>$id, ':p'=>$path]);
+    }
+    public function getPasswordHash(int $id): ?string
+    {
+        $stmt = $this->db->connect()
+                ->prepare('SELECT password_hash FROM users WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetchColumn() ?: null;
+    }
 }

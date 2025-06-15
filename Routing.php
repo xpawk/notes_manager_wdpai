@@ -3,6 +3,7 @@
 require_once 'src/Controllers/DefaultController.php';
 require_once 'src/Controllers/AuthController.php';
 require_once 'src/Controllers/NoteController.php';
+require_once 'src/Controllers/ProfileController.php';
 
 class Routing
 {

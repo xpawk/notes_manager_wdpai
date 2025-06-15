@@ -26,15 +26,17 @@ class AuthController extends AppController
             return;
         }
 
-        if ($user->getEmail() !== $email || !$user->verifyPassword($password)) {
-            $this->render("Auth/login", ["error" => "Invalid email or password"]);
+        if (!$user || !password_verify($password, $user['password_hash'])) {
+            $this->render('Auth/login', ['error' => 'Invalid email or password']);
             return;
         }
 
         $url = "http://$_SERVER[HTTP_HOST]";
         $_SESSION['user'] = [
-            'email' => $user->getEmail(),
-            'id' => $user->getId(),
+        'id'          => $user['id'],
+        'email'       => $user['email'],
+        'avatar_path' => $user['avatar_path'] ?? null,
+        'full_name'   => $user['full_name']   ?? null
         ];
         header("Location: $url/notes");
         exit;

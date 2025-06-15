@@ -13,9 +13,9 @@ class User
         $this->setPassword($password);
     }
 
-    public static function fromDatabase($id, $email, $passwordHash, $fullName = null)
+    public static function fromDatabase($id, $email, $passwordHash)
     {
-        $instance = new self($id, $email, '', $fullName);
+        $instance = new self($id, $email, '');
         $instance->passwordHash = $passwordHash;
         return $instance;
     }
