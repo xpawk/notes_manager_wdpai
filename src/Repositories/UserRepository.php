@@ -7,7 +7,7 @@ class UserRepository extends Repository
 {
     public function getUserByEmail(string $email): ?array
     {
-        $sql = 'SELECT * FROM view_user_profiles WHERE email = :e';
+        $sql = 'SELECT * FROM view_user_profile WHERE email = :email';
         $stmt = $this->db->connect()->prepare($sql);
         $stmt->execute([':email' => $email]);
 
@@ -16,7 +16,7 @@ class UserRepository extends Repository
 
     public function getUserById(int $userId): array
     {
-        $sql = 'SELECT * FROM view_user_profiles WHERE id = :id';
+        $sql = 'SELECT * FROM view_user_profile WHERE id = :id';
         $stmt = $this->db->connect()->prepare($sql);
         $stmt->execute([':id' => $userId]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
