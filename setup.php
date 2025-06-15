@@ -83,8 +83,9 @@ $db->exec(
     "CREATE OR REPLACE VIEW view_notes_with_tags AS
      SELECT
          n.*,
-         STRING_AGG(t.name, ', ' ORDER BY t.name) AS tag_list,
-         COUNT(t.id)                               AS tag_count
+         ARRAY_REMOVE(array_agg(t.name), NULL)          AS tag_arr,  
+         STRING_AGG(t.name, ', ' ORDER BY t.name)       AS tag_list,
+         COUNT(t.id)                                    AS tag_count
      FROM notes n
      LEFT JOIN note_tags nt ON nt.note_id = n.id
      LEFT JOIN tags      t  ON t.id      = nt.tag_id
@@ -92,20 +93,22 @@ $db->exec(
 );
 
 // ------------------------------------------------------------
-//  VIEW: view_user_profiles
+//  VIEW: view_user_profile
 // ------------------------------------------------------------
 $db->exec(
-    "CREATE OR REPLACE VIEW view_user_profiles AS
-     SELECT
-         u.id,
-         u.email,
-         p.full_name,
-         p.avatar_path,
-         r.name AS role_name,
-         u.created_at
-     FROM users u
-     LEFT JOIN user_profiles p ON p.user_id = u.id
-     LEFT JOIN roles        r ON r.id      = u.role_id;"
+   "CREATE OR REPLACE VIEW view_user_profile AS
+    SELECT
+        u.id,
+        u.role_id,
+        u.email,
+        u.password_hash,
+        p.full_name,
+        p.avatar_path,
+        r.name AS role_name,
+        u.created_at
+    FROM users u
+    LEFT JOIN user_profiles p ON p.user_id = u.id
+    LEFT JOIN roles        r ON r.id      = u.role_id;"
 );
 
 // ------------------------------------------------------------

@@ -5,16 +5,21 @@ require_once __DIR__ . '/../Models/User.php';
 
 class UserRepository extends Repository
 {
-   public function getUserByEmail(string $email): ?array
+    public function getUserByEmail(string $email): ?array
     {
-        $sql = 'SELECT u.id, u.email, u.password_hash, p.avatar_path, p.full_name
-                FROM users u
-                LEFT JOIN user_profiles p ON p.user_id = u.id
-                WHERE u.email = :email';
+        $sql = 'SELECT * FROM view_user_profiles WHERE email = :e';
         $stmt = $this->db->connect()->prepare($sql);
         $stmt->execute([':email' => $email]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
+    public function getUserById(int $userId): array
+    {
+        $sql = 'SELECT * FROM view_user_profiles WHERE id = :id';
+        $stmt = $this->db->connect()->prepare($sql);
+        $stmt->execute([':id' => $userId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function saveUser(User $user): int
@@ -43,17 +48,6 @@ class UserRepository extends Repository
             ':uid'      => $userId,
             ':fullname' => $fullName
         ]);
-    }
-
-    public function getProfile(int $userId): array
-    {
-        $sql = 'SELECT u.email, p.full_name, p.avatar_path
-                FROM users u
-                LEFT JOIN user_profiles p ON p.user_id = u.id
-                WHERE u.id = :id';
-        $stmt = $this->db->connect()->prepare($sql);
-        $stmt->execute([':id' => $userId]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function updateProfile(int $id, string $name, string $email): void

@@ -4,16 +4,22 @@ require_once __DIR__.'/../Models/Note.php';
 
 class NoteRepository extends Repository
 {
+    private function pgArrayToPhp(string $pgArray): array
+    {
+        $trim = trim($pgArray, '{}');
+        if ($trim === '') {           // pusty
+            return [];
+        }
+        return array_map('trim', explode(',', $trim));
+    }
     public function allByUser(int $userId): array
     {
         $sql = "
-        SELECT n.*, COALESCE(array_agg(t.name) FILTER (WHERE t.name IS NOT NULL), '{}') AS tags
-        FROM notes n
-        LEFT JOIN note_tags nt ON nt.note_id = n.id
-        LEFT JOIN tags      t  ON t.id      = nt.tag_id
-        WHERE n.user_id = :uid
-        GROUP BY n.id
-        ORDER BY n.created_at DESC";
+            SELECT *
+            FROM view_notes_with_tags
+            WHERE user_id = :uid
+            ORDER BY created_at DESC
+        ";
         $stmt = $this->db->connect()->prepare($sql);
         $stmt->execute([':uid' => $userId]);
 
@@ -21,9 +27,7 @@ class NoteRepository extends Repository
         $notes = [];
 
         foreach ($rows as $r) {
-            $tagArray = $r['tags'] === '{}' ? []
-                    : array_map('trim', explode(',', trim($r['tags'], '{}')));
-
+            $tagArray = $this->pgArrayToPhp($r['tag_arr'] ?? '{}');
             $notes[] = new Note(
                 $r['id'],
                 $r['user_id'],

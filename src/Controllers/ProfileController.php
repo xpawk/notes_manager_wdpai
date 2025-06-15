@@ -14,7 +14,7 @@ class ProfileController extends AppController
 
     private function renderSettings(array $extra = []): void
     {
-        $profile = $this->repo->getProfile($_SESSION['user']['id']);
+        $profile = $this->repo->getUserById($_SESSION['user']['id']);
         $this->render('Profile/settings', array_merge(['p' => $profile], $extra));
     }
 
