@@ -31,34 +31,34 @@ erDiagram
     TAGS  ||--o{ NOTE_TAGS     : links
 
     USERS {
-      int    id PK
+      int id 
       string email
       string password_hash
       timestamp created_at
     }
     USER_PROFILES {
-      int    user_id PK,FK
+      int user_id
       string full_name
       string avatar_path
     }
     NOTES {
-      int    id PK
-      int    user_id FK
+      int id 
+      int user_id 
       string title
-      text   content
-      bool   is_favorite
+      text content
+      bool is_favorite
       timestamp created_at
       timestamp updated_at
     }
     TAGS {
-      int    id PK
+      int id PK
       string name
     }
     NOTE_TAGS {
-      int note_id FK
-      int tag_id  FK
-      PK(note_id,tag_id)
+      int note_id 
+      int tag_id 
     }
+
 
 ```
 
